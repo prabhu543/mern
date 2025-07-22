@@ -1,0 +1,4 @@
+// npm => node package manager  => 
+// npm init -y     => package.json
+// npm i nodemon   => package-lock.json
+// npm i => install all the packages that is installed/used in copied project
