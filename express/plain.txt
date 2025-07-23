@@ -1,0 +1,4 @@
+ssr => server side rendering 
+//render
+
+api => 

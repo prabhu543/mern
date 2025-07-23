@@ -1,6 +1,11 @@
 const express = require('express');
+
 const app = express();
 
-app.listen(3000, () => {
-	console.log('server is running at port 3000');
+const { router } = require('./routes/route');
+
+app.use(router);
+
+app.listen(5000, () => {
+	console.log('server is working at post 5000');
 });
