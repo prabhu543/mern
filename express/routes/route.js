@@ -1,54 +1,31 @@
 const express = require('express');
 const router = express.Router();
 
-const { users } = require('./data');
+const {
+	allUsers,
+	createUser,
+	singleUser,
+	multiUser,
+	deleteUser,
+	updateUser,
+} = require('../controller/controller');
 router.use(express.json());
 
 router.get('/', (req, res) => {
 	res.send("Home");
 });
-router.get('/api/users', (req, res) => {
-	res.json(users);
-});
+router.get('/users', allUsers);
 
-router.get('/api/users/:id', (req, res) => {
-	const { id } = req.params;
-	const user = users.find((i) => i.id === id);
-	if (user) {
-		res.json(user);
-	} else {
-		res.status(404).json({ message: 'User not found!!!' });
-	}
-});
+
+router.get('/users',singleUser );
 
 // post data
-router.post('/api/users', (req, res) => {
-	const { id, name, jobRole } = req.body;
-	const newUser = { id, name, jobRole };
-	users.push(newUser);
-	res.json(users);
-});
+router.post('/users', createUser);
+router.post('/users', multiUser);
 // put data
-router.put('/api/users/:id', (req, res) => {
-	const { id } = req.params;
-	const user = users.find((u) => u.id === id);
-	user.name = 'Lekhan Raj';
-	user.jobRole = 'coordinator';
-	res.json(user);
-});
+router.put('/users/:id', updateUser);
 // delete data
-router.delete('/api/users/:id', (req, res) => {
-	const { id } = req.params;
-	// const remainedUsers = users.filter(u => u.id !== id);
-	const index = users.findIndex((u) => u.id === id);
-	if (!index) {
-		res.json({ message: 'user not found' });
-		return;
-	} else {
-		users.splice(index, 1);
-		res.json(users);
-	}
-});
+router.delete('/users/:id', deleteUser);
 
 
 module.exports = { router };
